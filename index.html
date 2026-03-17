@@ -5,108 +5,112 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Secret Heart</title>
 <style>
-  body{
-    margin:0;
-    height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:#ffe6ea;
-    font-family:Arial, Helvetica, sans-serif;
-  }
 
-  .container{
-    position:relative;
-    width:220px;
-    height:200px;
-    cursor:pointer;
-  }
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#ffe6ea;
+  font-family:Arial, Helvetica, sans-serif;
+}
 
-  .message{
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%, -50%);
-    text-align:center;
-    font-size:18px;
-    opacity:0;
-    transition:opacity 0.6s;
-    width:180px;
-  }
+.container{
+  position:relative;
+  width:240px;
+  height:220px;
+}
 
-  .heart{
-    position:absolute;
-    width:100px;
-    height:100px;
-    background:#e63946;
-    transform:rotate(-45deg);
-    top:40px;
-    left:60px;
-    transition:transform 0.6s;
-  }
+/* Message */
+.message{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  text-align:center;
+  font-size:18px;
+  width:190px;
+  opacity:0;
+  transition:opacity 0.6s ease;
+  pointer-events:none;
+}
 
-  .heart:before,
-  .heart:after{
-    content:"";
-    position:absolute;
-    width:100px;
-    height:100px;
-    background:#e63946;
-    border-radius:50%;
-  }
+.container:hover .message{
+  opacity:1;
+}
 
-  .heart:before{
-    top:-50px;
-    left:0;
-  }
+/* Heart wrapper */
+.heart-wrapper{
+  position:absolute;
+  top:40px;
+  left:70px;
+  width:100px;
+  height:100px;
+}
 
-  .heart:after{
-    left:50px;
-    top:0;
-  }
+/* Base heart */
+.heart{
+  position:absolute;
+  width:100px;
+  height:100px;
+  background:#e63946;
+  transform:rotate(-45deg);
+}
 
-  .fold{
-    position:absolute;
-    width:100px;
-    height:100px;
-    background:#c92f3a;
-    transform:rotate(-45deg);
-    top:40px;
-    left:60px;
-    transform-origin:left;
-    transition:transform 0.6s;
-    clip-path:polygon(0 0, 100% 0, 0 100%);
-  }
+.heart:before,
+.heart:after{
+  content:"";
+  position:absolute;
+  width:100px;
+  height:100px;
+  background:#e63946;
+  border-radius:50%;
+}
 
-  .container.open .fold{
-    transform:rotate(-135deg);
-  }
+.heart:before{
+  top:-50px;
+  left:0;
+}
 
-  .container.open .message{
-    opacity:1;
-  }
+.heart:after{
+  left:50px;
+  top:0;
+}
+
+/* Folded corner */
+.fold{
+  position:absolute;
+  width:100px;
+  height:100px;
+  background:#c92f3a;
+  transform:rotate(-45deg);
+  transform-origin:left bottom;
+  clip-path:polygon(0 100%,100% 100%,0 0);
+  transition:transform 0.6s ease;
+}
+
+/* Open animation */
+.container:hover .fold{
+  transform:rotate(-135deg);
+}
+
 </style>
 </head>
 <body>
 
-<div class="container" id="heartBox">
-  <div class="message">I love you endlessly. Thank you for being in my life and making it so much better.<br/>You make my day better.</div>
-  <div class="heart"></div>
-  <div class="fold"></div>
+<div class="container">
+
+  <div class="message">
+    I love you endlessly. Thank you for being in my life and making it so much better.
+  </div>
+
+  <div class="heart-wrapper">
+    <div class="heart"></div>
+    <div class="fold"></div>
+  </div>
+
 </div>
-
-<script>
-  const box = document.getElementById('heartBox');
-
-  box.addEventListener('mouseenter', () => {
-    box.classList.add('open');
-  });
-
-  box.addEventListener('mouseleave', () => {
-    box.classList.remove('open');
-  });
-</script>
 
 </body>
 </html>
-
